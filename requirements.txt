@@ -14,7 +14,7 @@ colormath==3.0.0
     # via -r requirements.in
 idna==3.10
     # via requests
-networkx==3.5
+networkx==3.4
     # via colormath
 numpy==2.2.6
     # via colormath
