@@ -3,7 +3,8 @@
 
 This is just a little tool for the [spoolman](https://github.com/Donkie/Spoolman) API. It finds filaments with a color close enough to the one you specified.
 
-# usage
+## usage
+
 ```
 Spoolman-color-finder [-h] [--url URL] [-d DISTANCE] color
 
