@@ -1,4 +1,3 @@
-import math
 import sys
 import argparse
 from skimage.color import deltaE_ciede2000, rgb2lab
