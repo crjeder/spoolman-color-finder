@@ -1,9 +1,10 @@
 import math
 import sys
+import argparse
 from colormath.color_objects import sRGBColor, LabColor
 from colormath.color_conversions import convert_color
 import requests
-import argparse
+
 
 # Create argument parser
 parser = argparse.ArgumentParser(description="Finds filaments in spoolman which match the color you specified.",
