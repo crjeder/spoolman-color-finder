@@ -3,7 +3,6 @@ import sys
 from colormath.color_objects import sRGBColor, LabColor
 from colormath.color_conversions import convert_color
 import requests
-import json
 import argparse
 
 # Create argument parser
