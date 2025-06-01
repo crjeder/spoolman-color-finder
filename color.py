@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser(description="Finds filaments in spoolman which 
                                  prog="Spoolman-color-finder")
 parser.add_argument("color", type=str, help="the color value in hex to search for")
 parser.add_argument("--url", "-u", type=str, default="http://127.0.0.1")
-parser.add_argument("-d", "--distance", type=int, default = 15, 
+parser.add_argument("-d", "--distance", type=int, default = 15,
                     help="how different the colors are allowed to be. (high value means differs a lot)")
 
 args = parser.parse_args()
@@ -29,7 +29,7 @@ color_list = []
 params = {"fmt": "json"}
 
 try:
-    response = requests.get(url, params=params)
+    response = requests.get(url, params=params, timeout=1)
     response.raise_for_status()  # Raises HTTPError if the response contains an error (4xx or 5xx)
 except requests.exceptions.HTTPError as errh:
     print("HTTP Error:", errh)
@@ -72,4 +72,3 @@ if len(color_list) > 0:
         print(item)
 else:
     print("No filaments matching your color found")
-
