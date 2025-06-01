@@ -1,8 +1,7 @@
 import math
 import sys
 import argparse
-from colormath.color_objects import sRGBColor, LabColor
-from colormath.color_conversions import convert_color
+from skimage.color import deltaE_ciede2000, rgb2lab
 import requests
 
 # Create argument parser
@@ -19,11 +18,11 @@ max_distance = args.distance
 hex_color = args.color
 hex_color = hex_color.rstrip("#")
 
-match_color_srgb = sRGBColor(int(hex_color[0:2], 16),
-                            int(hex_color[2:4], 16),
-                            int(hex_color[4:6], 16), True)
+match_color_srgb = [int(hex_color[0:2], 16)/255,
+                    int(hex_color[2:4], 16)/255,
+                    int(hex_color[4:6], 16)/255]
 
-match_color_lab = convert_color(match_color_srgb, LabColor)
+match_color_lab = rgb2lab(match_color_srgb)
 color_list = []
 params = {"fmt": "json"}
 
@@ -49,15 +48,11 @@ if response.status_code == 200:
     for row in data:
         hex_color = row["color_hex"]
         if hex_color is not None:
-            hex_color = hex_color.lstrip('#')  # Remove '#' if present
-            rgb = sRGBColor(int(hex_color[0:2], 16),
-                            int(hex_color[2:4], 16),
-                            int(hex_color[4:6], 16), True)
-            lab = convert_color(rgb, LabColor)
-            distance = math.sqrt((lab.lab_a - match_color_lab.lab_a)**2 +
-                               (lab.lab_b - match_color_lab.lab_b)**2 +
-                               (lab.lab_l - match_color_lab.lab_l)**2)
-
+            rgb = [int(hex_color[0:2], 16)/255,
+                    int(hex_color[2:4], 16)/255,
+                    int(hex_color[4:6], 16)/255]
+            lab = rgb2lab(rgb)
+            distance = float(deltaE_ciede2000(match_color_lab, lab))
             if distance < max_distance:
                 match = (row["id"], row["name"], distance)
                 color_list.append(match)
