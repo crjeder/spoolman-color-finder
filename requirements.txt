@@ -12,9 +12,7 @@ charset-normalizer==3.4.2
     # via requests
 colormath==3.0.0
     # via -r requirements.in
-idna==3.10
-    # via requests
-networkx==3.4
+network>=3.0
     # via colormath
 numpy==2.2.6
     # via colormath
