@@ -1,6 +1,7 @@
 import sys
 import argparse
-from skimage.color import deltaE_ciede2000, rgb2lab
+import skimage.color as ski
+#from skimage.color import deltaE_ciede2000, rgb2lab
 import requests
 
 # Create argument parser
@@ -21,7 +22,7 @@ match_color_srgb = [int(hex_color[0:2], 16)/255,
                     int(hex_color[2:4], 16)/255,
                     int(hex_color[4:6], 16)/255]
 
-match_color_lab = rgb2lab(match_color_srgb)
+match_color_lab = ski.rgb2lab(match_color_srgb)
 color_list = []
 params = {"fmt": "json"}
 
@@ -50,8 +51,8 @@ if response.status_code == 200:
             rgb = [int(hex_color[0:2], 16)/255,
                     int(hex_color[2:4], 16)/255,
                     int(hex_color[4:6], 16)/255]
-            lab = rgb2lab(rgb)
-            distance = float(deltaE_ciede2000(match_color_lab, lab))
+            lab = ski.rgb2lab(rgb)
+            distance = float(ski.deltaE_ciede2000(match_color_lab, lab))
             if distance < max_distance:
                 match = (row["id"], row["name"], distance)
                 color_list.append(match)

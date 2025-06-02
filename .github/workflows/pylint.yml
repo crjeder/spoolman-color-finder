@@ -19,9 +19,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install pylint
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Analysing the code with pylint
+    - name: Analyse the code with pylint
       run: |
         pylint --fail-under 5 --fail-on E $(git ls-files '*.py')
-#
-# pylint $(git ls-files '*.py'); exit $([[ $? -eq 1 || $? -eq 2 ]] && echo $? || echo 0)
-       
