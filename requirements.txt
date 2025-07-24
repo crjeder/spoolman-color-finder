@@ -28,7 +28,7 @@ packaging==25.0
     # via
     #   lazy-loader
     #   scikit-image
-pillow==11.2.1
+pillow==11.3
     # via
     #   imageio
     #   scikit-image
