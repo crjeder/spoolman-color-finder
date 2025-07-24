@@ -40,5 +40,5 @@ scipy==1.15.3
     # via scikit-image
 tifffile==2025.6.1
     # via scikit-image
-urllib3==2.4.0
+urllib3==2.5
     # via requests
